@@ -15,7 +15,7 @@
 ## Vars ----------------------------------------------------------------------
 
 # declare version
-lib_version="1.0.2"
+lib_version="1.0.3"
 
 # reload script with bash
 if [ ! -n "${BASH_VERSION}" ]; then
@@ -227,6 +227,9 @@ function write_log() {
 		mkdir -p ${log_file%/*}
 		touch ${log_file}
 	fi
+
+	# open a new line
+	echo >> ${log_file}
 
 	if [ "${log_level}" == "verbose" ]; then
 		# output to both of console and Log file

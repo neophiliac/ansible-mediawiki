@@ -23,7 +23,7 @@ set -e
 
 ## Vars ----------------------------------------------------------------------
 # declare version
-script_version="1.0.2"
+script_version="1.0.3"
 script_path="$( if [ "$( echo "${0%/*}" )" != "$( echo "${0}" )" ] ; then cd "$( echo "${0%/*}" )"; fi; pwd )"
 script_name="$(basename $0)"
 script_usage="Usage: $0 <directory>
@@ -416,7 +416,8 @@ fi
 array_all=$(find ${media_dir}/ -maxdepth 2 -type f -not -path '*/\.*')
 for file in ${array_all[@]};
 do
-	if [[ $(lowercase $(get_filetype ${file})) =~ ^(${supported_filetype}) ]]; then
+
+	if [[ $(get_filetype ${file,,}) =~ ^(${supported_filetype}) ]]; then
 		array_files=("${file}" "${array_files[@]}")
 	fi
 done
@@ -435,7 +436,7 @@ exec_command "*** Creating temporary directory and pid_file ..." \
 for file in ${array_files[@]};
 do
 	exec_command "*** process and upload file $(basename ${file}) ..." \
-		cp "${file}" "${work_dir}/$(get_filename ${str_File}).$(get_filetype ${str_File})"; \
+		cp "${file}" "${work_dir}/$(get_filename ${file}).$(get_filetype ${file,,})"; \
 		php ${script_path}/maintenance/importImages.php ${work_dir} --comment=$(wiki_comment ${file}) >> ${log_file};
 
 	if [ $? -ne 0 ]; then
@@ -450,6 +451,7 @@ done
 
 # rebuildfileCache.php will use when FileCache option is enable.
 exec_command "*** rebuild wiki media meta data ..." \
+	echo; \
 	php ${script_path}/maintenance/rebuildImages.php >> ${log_file}; \
 	php ${script_path}/maintenance/rebuildFileCache.php >> ${log_file};
 
