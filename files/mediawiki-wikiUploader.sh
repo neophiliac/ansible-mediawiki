@@ -241,7 +241,7 @@ category_unknown="uncategory"
 supported_filetype="gif|jpg|pdf|png|mov|mp4"
 
 # define keyword for position skip
-keyword_skipped="xxx|skip"
+keyword_skipped="xxx|skip|untitled"
 
 # working directory
 work_dir="/tmp/upload$$"
@@ -527,7 +527,7 @@ exec_command "*** Creating temporary directory and pid_file ..." \
 # process the file and upload into mediaWiki.
 for file in ${array_files[@]};
 do
-	process_file="${work_dir}/$(get_filename ${file}).$(get_filetype ${file,,})"
+	process_file="${work_dir}/$(get_filename ${file} | sed 's/-\{1,\}/-/g').$(get_filetype ${file,,})"
 	exec_command "*** process and upload file $(basename ${file}) ..." \
 		cp "${file}" "${process_file}"; \
 		php ${script_path}/maintenance/importImages.php ${work_dir} --comment=$(wiki_comment ${process_file}) >> ${log_file};
