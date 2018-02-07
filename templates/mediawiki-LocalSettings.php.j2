@@ -77,7 +77,7 @@ $wgMessageCacheType = CACHE_ACCEL;
 $wgMemCachedServers = array();
 $wgUseLocalMessageCache = true;
 $wgParserCacheType = CACHE_ACCEL;
-$wgUseGzip = true;
+#$wgUseGzip = true;				  // Disable on 1.30
 $wgEnableSidebarCache = true;
 
 ## Set $wgCacheDirectory to a writable directory on the web server
@@ -91,8 +91,8 @@ $wgMiserMode = true;
 
 # Text cache
 $wgCompressRevisions = true; // use with care (see talk page)
-$wgRevisionCacheExpiry = 100;     // 3*24*3600;
-$wgParserCacheExpireTime = 100;   // 14*24*3600;
+$wgRevisionCacheExpiry = 3*24*3600;
+$wgParserCacheExpireTime = 14*24*3600;
 
 ## File cache
 $wgUseFileCache = true;
