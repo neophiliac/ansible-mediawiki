@@ -18,12 +18,12 @@
 
 - name: check if php 7.x installed
   stat:
-    path: "/etc/php/7.0/fpm/php.ini"
+    path: "/etc/php/7.1/fpm/php.ini"
   register: php7_exist
 
 - name: update php.ini configuration (php 7.x)
   lineinfile:
-    dest: '/etc/php/7.0/fpm/php.ini'
+    dest: '/etc/php/7.1/fpm/php.ini'
     regexp: "{{ item.regxp }}"
     line: "{{ item.line }}"
     state: present
@@ -155,7 +155,7 @@
       name: nginx
       state: restarted
   - service:
-      name: php7.0-fpm
+      name: php7.1-fpm
       state: restarted
   - service:
       name: parsoid
