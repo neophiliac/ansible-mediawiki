@@ -21,6 +21,11 @@
 # Specify hostname and domain that should be set in the target image.
 target_host_domain: 'lifamilylife.com'
 
+# .. envvar:: mediawiki_uniqueid
+#
+# Specify mediaiwki uniqueid
+mediawiki_uniqueid: 'sandbox'
+
 # .. envvar:: target_root_password
 #
 # Specify root password
@@ -36,11 +41,6 @@ target_data_root: '/yongxin'
 # Specify folder that will be use as new location of application data files
 # in case if you want to collect all appdata files in one
 target_appdata_root: '{{ target_data_root }}/private/var'
-
-# .. envvar:: mediawiki_uniqueid
-#
-# Specify mediaiwki uniqueid
-mediawiki_uniqueid: '{{ target_host_name }}'
 
 # .. envvar:: mediawiki_admin_user
 #
