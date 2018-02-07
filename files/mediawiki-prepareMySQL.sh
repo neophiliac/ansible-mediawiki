@@ -52,7 +52,7 @@ if [[ $prompt == "y" || $prompt == "Y" || $prompt == "yes" || $prompt == "Yes" ]
     echo "CREATE DATABASE IF NOT EXISTS ${db_name} /*\!40100 DEFAULT CHARACTER SET utf8 */;" >> ${script_path}/preparedb.sql
     echo "/* - there is not create user if not exist command, " >> ${script_path}/preparedb.sql
     echo "     but grant privileges will create user first if user doesn't exist! */" >> ${script_path}/preparedb.sql
-    echo "GRANT ALL PRIVILEGES ON ${db_name}.* TO '${db_user}'@'localhost';" >> ${script_path}/preparedb.sql
+    echo "GRANT ALL PRIVILEGES ON ${db_name}.* TO '${db_user}'@'localhost' IDENTIFIED BY '${db_pass}';" >> ${script_path}/preparedb.sql
     echo "/* - reset user password. */" >> ${script_path}/preparedb.sql
     echo "UPDATE mysql.user" >> ${script_path}/preparedb.sql
     echo "    SET authentication_string = PASSWORD('${db_pass}'), password_expired = 'N'" >> ${script_path}/preparedb.sql
